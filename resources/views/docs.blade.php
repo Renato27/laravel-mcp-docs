@@ -51,7 +51,11 @@
     @if ($branding->links())
         <div class="brand-links">
             @foreach ($branding->links() as $label => $url)
-                <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $label }}</a>
+                @if (preg_match('/^https?:\/\//', $url))
+                    <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $label }}</a>
+                @else
+                    <a href="mailto:{{ $url }}">{{ $label }}</a>
+                @endif
             @endforeach
         </div>
     @endif
