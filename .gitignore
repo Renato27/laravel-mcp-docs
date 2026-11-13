@@ -1,0 +1,7 @@
+/vendor
+/.phpunit.cache
+/.playwright-mcp
+/.claude
+/.history
+composer.lock
+.DS_Store

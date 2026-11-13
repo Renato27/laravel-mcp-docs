@@ -1,0 +1,66 @@
+{
+    "name": "renatomaldonado/laravel-mcp-docs",
+    "description": "Generate a browsable documentation page for your Laravel MCP servers: tools, resources, prompts and per-client install instructions.",
+    "keywords": [
+        "laravel",
+        "mcp",
+        "documentation",
+        "model-context-protocol"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "ext-json": "*",
+        "illuminate/console": "^11.45.3|^12.41.1|^13.0",
+        "illuminate/container": "^11.45.3|^12.41.1|^13.0",
+        "illuminate/contracts": "^11.45.3|^12.41.1|^13.0",
+        "illuminate/routing": "^11.45.3|^12.41.1|^13.0",
+        "illuminate/support": "^11.45.3|^12.41.1|^13.0",
+        "laravel/mcp": "^0.7.2|^1.0@beta",
+        "league/commonmark": "^2.6"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.0|^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelMcpDocs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelMcpDocs\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelMcpDocs\\McpDocsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "pest",
+        "test:coverage": "pest --coverage",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
+        ]
+    }
+}

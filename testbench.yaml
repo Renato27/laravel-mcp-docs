@@ -1,0 +1,16 @@
+providers:
+  - Laravel\Mcp\Server\McpServiceProvider
+  - LaravelMcpDocs\McpDocsServiceProvider
+
+env:
+  - APP_NAME="Acme Platform"
+  - APP_DEBUG=true
+  - MCP_DOCS_THEME=system
+
+workbench:
+  start: '/mcp/docs'
+  install: true
+  discovers:
+    web: true
+    api: false
+    commands: false
