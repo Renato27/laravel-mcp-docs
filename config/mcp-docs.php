@@ -27,13 +27,13 @@ return [
     | Access
     |--------------------------------------------------------------------------
     |
-    | This page lists everything an AI assistant can do to your application, so
-    | it is treated as internal by default.
+    | This page is the connector's public documentation, so it is public by
+    | default; the text written for the model stays off it ("model_text").
     |
-    |   "public"     - anyone who can reach the URL can read it.
+    |   "public"     - anyone who can reach the URL can read it. The default.
     |   "restricted" - only the addresses in "allowed_ips" can; everyone else
-    |                  gets a 403. This is the default, and anything other than
-    |                  the exact string "public" is treated as restricted.
+    |                  gets a 403. Anything other than the exact string
+    |                  "public" is treated as restricted.
     |
     | "allowed_ips" accepts single addresses and CIDR ranges, IPv4 and IPv6.
     | An empty list under "restricted" allows nobody.
@@ -44,7 +44,7 @@ return [
     */
 
     'access' => [
-        'mode' => env('MCP_DOCS_ACCESS', 'restricted'),
+        'mode' => env('MCP_DOCS_ACCESS', 'public'),
 
         'allowed_ips' => [
             '127.0.0.1',
