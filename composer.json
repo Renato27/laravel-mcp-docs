@@ -33,6 +33,12 @@
             "LaravelMcpDocs\\Tests\\": "tests/"
         }
     },
+    "authors": [
+        {
+            "name": "renato maldonado",
+            "email": "mallldonado@gmail.com"
+        }
+    ],
     "extra": {
         "laravel": {
             "providers": [
