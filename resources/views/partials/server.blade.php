@@ -5,7 +5,6 @@
             <p class="meta">
                 <span class="badge badge-neutral">v{{ $server->version }}</span>
                 <span class="badge badge-neutral">{{ $server->transport()->label() }}</span>
-                <span class="badge badge-neutral">MCP {{ $server->protocolVersion }}</span>
             </p>
         </div>
         <code class="endpoint" title="{{ $server->endpoint() }}">{{ $server->endpoint() }}</code>
