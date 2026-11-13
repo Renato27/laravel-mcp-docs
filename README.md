@@ -21,9 +21,9 @@ The page is served at `/mcp/docs`. Publish the config to move it:
 php artisan vendor:publish --tag=mcp-docs-config
 ```
 
-Out of the box the page answers only `127.0.0.1` and `::1`; everyone else gets
-a 403. To publish it, set `MCP_DOCS_ACCESS=public`, or list the addresses
-allowed under `access.allowed_ips` — see "Public or restricted" below.
+Out of the box the page is public. To limit it to the addresses under
+`access.allowed_ips`, set `MCP_DOCS_ACCESS=restricted` — see "Public or
+restricted" below.
 
 ## What you get
 
@@ -171,9 +171,9 @@ return [
         'name' => 'mcp-docs',
     ],
 
-    // See "Public or restricted" below. Closed by default.
+    // See "Public or restricted" below. Public by default.
     'access' => [
-        'mode' => env('MCP_DOCS_ACCESS', 'restricted'),
+        'mode' => env('MCP_DOCS_ACCESS', 'public'),
         'allowed_ips' => ['127.0.0.1', '::1'],
     ],
 
@@ -418,14 +418,14 @@ actually re-read the linked pages.
 
 ## Public or restricted
 
-This page enumerates everything an AI assistant can do to your application, so
-the package treats it as internal until you say otherwise:
+This page is the connector's public documentation, so it is public by default;
+the text written for the model stays off it. To keep it internal, restrict it:
 
 ```php
 'access' => [
     // 'public'     - anyone who can reach the URL can read it
     // 'restricted' - only "allowed_ips" can; everyone else gets a 403
-    'mode' => env('MCP_DOCS_ACCESS', 'restricted'),
+    'mode' => env('MCP_DOCS_ACCESS', 'public'),
 
     'allowed_ips' => [
         '127.0.0.1',
@@ -439,7 +439,7 @@ the package treats it as internal until you say otherwise:
 `allowed_ips` takes single addresses and CIDR ranges, IPv4 and IPv6. Both the
 page and the JSON manifest are covered.
 
-The default is deliberately closed, and it fails closed in every direction:
+Once restricted, it fails closed in every direction:
 
 - Anything other than the exact string `"public"` is treated as restricted, so a
   typo or a truthy value locks the page rather than opening it.
